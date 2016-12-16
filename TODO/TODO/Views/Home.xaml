@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TODO.Views.Home"
+             xmlns:Views="clr-namespace:TODO.Views;assembly=TODO">
+  
+  <MasterDetailPage.Master>
+  <ContentPage Title="Menu"
+               BackgroundColor="Aqua">
+    <StackLayout Orientation="Vertical">
+     
+    </StackLayout>
+  </ContentPage>  
+  </MasterDetailPage.Master>
+  
+  <MasterDetailPage.Detail>
+    <Views:TasksList Title="TODO"/>
+  </MasterDetailPage.Detail>
+</MasterDetailPage>
