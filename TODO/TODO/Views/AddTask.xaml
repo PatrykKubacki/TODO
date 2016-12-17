@@ -1,40 +1,33 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TODO.Views.AddTask"
-             Title="Dodaj nowe zadanie">
-  
-  <StackLayout Orientation="Vertical"
-               VerticalOptions="Center"
-               HorizontalOptions="Center">
-    <Entry x:Name="Name" Placeholder="Nazwa"/>
-    <Entry x:Name="Description" Placeholder="Opis"/>
-    <Entry x:Name="Category" Placeholder="Kategoria"/>
-    <Label Text="Na kiedy"/>
-    <DatePicker x:Name="DeadLine"/>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto"/>
-        <ColumnDefinition Width="Auto"/>
-      </Grid.ColumnDefinitions>
-      <Label Text="Zrobione?"
-             Grid.Column="0"/>
-      <Switch x:Name="Done"
-              Grid.Column="1"/>
-      </Grid>
-    
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto"/>
-        <ColumnDefinition Width="Auto"/>
-      </Grid.ColumnDefinitions>
-      
-      <Button Text="Zapisz"
-              Grid.Column="0"
-              Clicked="Save"/>
-      <Button Text="Anuluj"
-              Grid.Column="1"
-              Clicked="Cancel"/>
-    </Grid>
-  </StackLayout>
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			x:Class="TODO.Views.AddTask"
+			Title="Dodaj nowe zadanie">
+
+	<StackLayout Orientation="Vertical"
+				VerticalOptions="Center"
+				HorizontalOptions="Center">
+		<Entry x:Name="Name" Placeholder="Nazwa"/>
+		<Entry x:Name="Description" Placeholder="Opis"/>
+		<Entry x:Name="Category" Placeholder="Kategoria"/>
+		<Label Text="Na kiedy"/>
+		<DatePicker x:Name="DeadLine"/>
+		<Label Text="Zrobione?"/>
+		<Switch x:Name="Done"/>
+
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Text="Zapisz"
+					Grid.Column="0"
+					Clicked="Save"/>
+			<Button Text="Anuluj"
+					Grid.Column="1"
+					Clicked="Cancel"/>
+		</Grid>
+	</StackLayout>
 </ContentPage>

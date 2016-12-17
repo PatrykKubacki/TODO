@@ -14,7 +14,6 @@ namespace TODO.Views {
 
 		protected override void OnAppearing() {
 			base.OnAppearing();
-			HowManyTodo.Text = App.Database.GetItems().Count().ToString();
 		}
 	}
 }

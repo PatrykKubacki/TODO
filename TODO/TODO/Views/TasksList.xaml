@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			x:Class="TODO.Views.TasksList">
+			x:Class="TODO.Views.TasksList"
+             BackgroundColor="White">
 
-	<StackLayout Orientation="Horizontal">
+	<StackLayout Orientation="Vertical">
+    <Image x:Name="NoToDoImage"/>
+    
 		<ListView x:Name="TasksView">
 			<ListView.ItemTemplate>
 				<DataTemplate>
@@ -11,36 +14,43 @@
 						<StackLayout Orientation="Vertical"
 									Padding="5.0"
 									HorizontalOptions="Start">
-							<StackLayout Orientation="Vertical" Padding="5" BackgroundColor="Red">
-								<Label Text="{Binding Name}" Font="Bold" FontSize="20"/>
-								<Label Text="{Binding Category}" Font="Small" FontSize="15"/>
-								<Label Text="{Binding DeadLine}" Font="Small" FontSize="15" Opacity="0.6"/>
+							<StackLayout Orientation="Vertical" Padding="5" BackgroundColor="Silver">
+								<Grid Padding="5">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<Label Text="{Binding Name}" Grid.Column="0" Font="Bold" FontSize="20" TextColor="Black"/>
+									<Label Text="Kategoria:" Grid.Column="1" Font="Small" FontSize="20" TextColor="Black"/>
+									<Label Text="{Binding Category}" Grid.Column="2" Font="Small" FontSize="20" TextColor="Black"/>
+								</Grid>
+								<Grid Padding="5">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<Label Text="Opis:" Grid.Column="0" Font="Small" FontSize="15" TextColor="Black"/>
+									<Label Text="{Binding Description}" Grid.Column="1" Font="Small" FontSize="15" TextColor="Black"/>
+								</Grid>
+
+								<Grid Padding="5">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<Label Text="Na kiedy:" Grid.Column="0" Font="Small" FontSize="15" TextColor="Black"/>
+									<Label Text="{Binding DeadLine}" Grid.Column="1" Font="Small" FontSize="15" Opacity="0.6" TextColor="Black"/>
+								</Grid>
 							</StackLayout>
 						</StackLayout>
 					</ViewCell>
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-
-		<ListView x:Name="TasksView2">
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<ViewCell>
-						<StackLayout Orientation="Vertical"
-									Padding="5.0"
-									HorizontalOptions="Start">
-							<StackLayout Orientation="Vertical" Padding="5" BackgroundColor="Green">
-								<Label Text="{Binding Name}" Font="Bold" FontSize="20"/>
-								<Label Text="{Binding Category}" Font="Small" FontSize="15"/>
-								<Label Text="{Binding DeadLine}" Font="Small" FontSize="15" Opacity="0.6"/>
-							</StackLayout>
-						</StackLayout>
-					</ViewCell>
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
-
-
+   
 	</StackLayout>
 
 	<ContentPage.ToolbarItems>
@@ -48,11 +58,11 @@
 					Text="Dodaj"
 					Clicked="Add"/>
 		<ToolbarItem x:Name="DeleteItem"
-                 Text="Skasuj"
-                 Clicked="Delete"/>
-    <ToolbarItem x:Name="EditItem"
-                 Text="Edytuj"
-                 Clicked="Edit"/>
+					Text="Skasuj"
+					Clicked="Delete"/>
+		<ToolbarItem x:Name="EditItem"
+					Text="Edytuj"
+					Clicked="Edit"/>
 
 	</ContentPage.ToolbarItems>
 </ContentPage>

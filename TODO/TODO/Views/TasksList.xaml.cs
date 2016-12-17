@@ -24,16 +24,26 @@ namespace TODO.Views {
 
 		protected override void OnAppearing() {
 			base.OnAppearing();
-			IList<TodoItem> toDoItems = App.Database.GetItems().Where(i => !i.Done).ToList();
-			IList<TodoItem> doneItems = App.Database.GetItems().Where(i => i.Done).ToList();
+			IList<TodoItem> toDoItems = App.Database.GetItems().ToList();
+			SetImage(toDoItems);
 			TasksView.ItemsSource = toDoItems.OrderBy(x=>x.DeadLine);
-			TasksView2.ItemsSource = doneItems.OrderBy(x => x.DeadLine);
 		}
 
-		private void Delete(object sender, EventArgs e) {
+		private void SetImage(IList<TodoItem>  toDoItems) {
+			if (toDoItems.Count == 0) {
+				NoToDoImage.Source = Device.OS == TargetPlatform.Windows ? "noTodo.png" : "noTodo";
+				NoToDoImage.IsVisible = true;
+			}
+			else NoToDoImage.IsVisible = false;
+		}
+
+		private async void Delete(object sender, EventArgs e) {
 			var item = TasksView.SelectedItem as TodoItem;
-			if (item != null)
+			var answer = await DisplayAlert("Usunięcie zadania", "Czy na pewno chcesz usunąć zadanie?", "Tak", "Nie");
+			if (item != null && answer) {
 				App.Database.DeleteItem(item.Id);
+			}
+			OnAppearing();
 		}
 
 		private void Edit(object sender, EventArgs e) {

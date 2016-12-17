@@ -8,8 +8,18 @@
   <ContentPage Title="Menu"
                BackgroundColor="Black">
     <StackLayout Orientation="Vertical" Padding="10">
-     <Label Text="Do zrobienia:" TextColor="White" FontSize="15" Font="Bold"/>
-      <Label x:Name="HowManyTodo" TextColor="White" FontSize="15" Font="Bold"/>
+    <ListView x:Name="MenuListView">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <StackLayout Orientation="Vertical"
+									Padding="5.0"
+									HorizontalOptions="Start">         
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
     </StackLayout>
   </ContentPage>  
   </MasterDetailPage.Master>
