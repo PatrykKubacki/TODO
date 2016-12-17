@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace TODO {
 	public class App : Application {
-
+	
 		static TodoItemDatabase _database;
 		public int ResumeAtTodoId { get; set; }
 		public static TodoItemDatabase Database => _database ?? (_database = new TodoItemDatabase());
@@ -19,7 +19,6 @@ namespace TODO {
 			var navigationPage = new NavigationPage(new Home()) {
 				BarBackgroundColor = Color.Aqua
 			};
-			
 			MainPage = navigationPage;
 		}
 

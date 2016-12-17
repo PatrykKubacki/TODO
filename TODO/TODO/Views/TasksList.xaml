@@ -1,31 +1,58 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TODO.Views.TasksList">
+			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			x:Class="TODO.Views.TasksList">
 
-  <ListView x:Name="TasksView">
-  <ListView.ItemTemplate>
-    <DataTemplate>
-      <ViewCell>
-        <StackLayout Orientation="Vertical"
-                     Padding="25.0">
-          
-          <Grid BackgroundColor="White" HeightRequest="10" />
-            <StackLayout Orientation="Vertical" Padding="20" BackgroundColor="Lime">
-              <Label Text="{Binding Name}" Font="Large"/>
-              <Label Text="{Binding DeadLine}" Font="Bold" Opacity="0.6"/>
-            </StackLayout>
-        </StackLayout>
-      </ViewCell>
-    </DataTemplate>
-  </ListView.ItemTemplate>
-    
-  </ListView>
-  
-  <ContentPage.ToolbarItems>
-    <ToolbarItem x:Name="MyToolBarItem"
-                 Text="Dodaj"
-                 Clicked="Add"/>
-    
-  </ContentPage.ToolbarItems>
+	<StackLayout Orientation="Horizontal">
+		<ListView x:Name="TasksView">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Orientation="Vertical"
+									Padding="5.0"
+									HorizontalOptions="Start">
+							<StackLayout Orientation="Vertical" Padding="5" BackgroundColor="Red">
+								<Label Text="{Binding Name}" Font="Bold" FontSize="20"/>
+								<Label Text="{Binding Category}" Font="Small" FontSize="15"/>
+								<Label Text="{Binding DeadLine}" Font="Small" FontSize="15" Opacity="0.6"/>
+							</StackLayout>
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+		<ListView x:Name="TasksView2">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Orientation="Vertical"
+									Padding="5.0"
+									HorizontalOptions="Start">
+							<StackLayout Orientation="Vertical" Padding="5" BackgroundColor="Green">
+								<Label Text="{Binding Name}" Font="Bold" FontSize="20"/>
+								<Label Text="{Binding Category}" Font="Small" FontSize="15"/>
+								<Label Text="{Binding DeadLine}" Font="Small" FontSize="15" Opacity="0.6"/>
+							</StackLayout>
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+
+	</StackLayout>
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem x:Name="AddItem"
+					Text="Dodaj"
+					Clicked="Add"/>
+		<ToolbarItem x:Name="DeleteItem"
+                 Text="Skasuj"
+                 Clicked="Delete"/>
+    <ToolbarItem x:Name="EditItem"
+                 Text="Edytuj"
+                 Clicked="Edit"/>
+
+	</ContentPage.ToolbarItems>
 </ContentPage>

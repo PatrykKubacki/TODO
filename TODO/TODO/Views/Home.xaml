@@ -6,9 +6,10 @@
   
   <MasterDetailPage.Master>
   <ContentPage Title="Menu"
-               BackgroundColor="Aqua">
-    <StackLayout Orientation="Vertical">
-     
+               BackgroundColor="Black">
+    <StackLayout Orientation="Vertical" Padding="10">
+     <Label Text="Do zrobienia:" TextColor="White" FontSize="15" Font="Bold"/>
+      <Label x:Name="HowManyTodo" TextColor="White" FontSize="15" Font="Bold"/>
     </StackLayout>
   </ContentPage>  
   </MasterDetailPage.Master>

@@ -11,5 +11,10 @@ namespace TODO.Views {
 		public Home() {
 			InitializeComponent();
 		}
+
+		protected override void OnAppearing() {
+			base.OnAppearing();
+			HowManyTodo.Text = App.Database.GetItems().Count().ToString();
+		}
 	}
 }
