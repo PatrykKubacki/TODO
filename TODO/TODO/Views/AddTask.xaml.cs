@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TODO.Entities;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace TODO.Views {
 	public partial class AddTask : ContentPage {
@@ -17,13 +18,8 @@ namespace TODO.Views {
 		}
 
 		private async void Save(object sender, EventArgs e) {
-			App.Database.SaveItem(new TodoItem {
-				Name = Name.Text,
-				Category = Category.Text,
-				DeadLine = DeadLine.Date + DateTime.Now.TimeOfDay,
-				Description = Description.Text,
-				Done = Done.IsToggled
-			});
+			var toDoItem = (TodoItem)BindingContext;
+			App.Database.SaveItem(toDoItem);
 			await Navigation.PushAsync(new Home());
 		}
 	}

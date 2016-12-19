@@ -2,15 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			x:Class="TODO.Views.TasksList"
-             BackgroundColor="White">
+			BackgroundColor="White">
 
 	<StackLayout Orientation="Vertical">
-    <Image x:Name="NoToDoImage"/>
-    
+		<Image x:Name="NoToDoImage"/>
+
 		<ListView x:Name="TasksView">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
+            <ViewCell.ContextActions>
+              <MenuItem Text="Szczegóły" Clicked="ShowDetails" CommandParameter="{Binding .}"/>
+              <MenuItem Text="Przeczytaj" Clicked="Speech" CommandParameter="{Binding .}"/>
+            </ViewCell.ContextActions>
 						<StackLayout Orientation="Vertical"
 									Padding="5.0"
 									HorizontalOptions="Start">
@@ -50,19 +54,20 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-   
+
 	</StackLayout>
 
 	<ContentPage.ToolbarItems>
-		<ToolbarItem x:Name="AddItem"
-					Text="Dodaj"
-					Clicked="Add"/>
+
 		<ToolbarItem x:Name="DeleteItem"
 					Text="Skasuj"
-					Clicked="Delete"/>
+					Clicked="Delete"
+    />
 		<ToolbarItem x:Name="EditItem"
 					Text="Edytuj"
 					Clicked="Edit"/>
-
+		<ToolbarItem x:Name="AddItem"
+					Text="Dodaj"
+					Clicked="Add"/>
 	</ContentPage.ToolbarItems>
 </ContentPage>

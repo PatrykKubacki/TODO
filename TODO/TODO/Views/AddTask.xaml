@@ -2,18 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			x:Class="TODO.Views.AddTask"
-			Title="Dodaj nowe zadanie">
+			Title="Dodaj nowe zadanie"
+             BackgroundColor="White"
+             >
 
 	<StackLayout Orientation="Vertical"
 				VerticalOptions="Center"
 				HorizontalOptions="Center">
-		<Entry x:Name="Name" Placeholder="Nazwa"/>
-		<Entry x:Name="Description" Placeholder="Opis"/>
-		<Entry x:Name="Category" Placeholder="Kategoria"/>
-		<Label Text="Na kiedy"/>
-		<DatePicker x:Name="DeadLine"/>
+		<Entry x:Name="Name" Placeholder="Nazwa" Text="{Binding Name}"/>
+		<Entry x:Name="Description" Placeholder="Opis" Text="{Binding Description}"/>
+		<Entry x:Name="Category" Placeholder="Kategoria" Text="{Binding Category}"/>
+    <Label Text="Na kiedy"/>
+		<DatePicker x:Name="DeadLine" Date="{Binding DeadLine}"/>
 		<Label Text="Zrobione?"/>
-		<Switch x:Name="Done"/>
+		<Switch x:Name="Done" IsToggled="{Binding Done}" />
 
 
 		<Grid>
@@ -24,10 +26,13 @@
 
 			<Button Text="Zapisz"
 					Grid.Column="0"
-					Clicked="Save"/>
+					Clicked="Save"
+              BorderColor="Black"/>
+      
 			<Button Text="Anuluj"
 					Grid.Column="1"
-					Clicked="Cancel"/>
+					Clicked="Cancel"
+              BorderColor="Black"/>
 		</Grid>
 	</StackLayout>
 </ContentPage>

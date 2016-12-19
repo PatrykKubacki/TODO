@@ -2,29 +2,46 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TODO.Views.Home"
-             xmlns:Views="clr-namespace:TODO.Views;assembly=TODO">
+             xmlns:Views="clr-namespace:TODO.Views;assembly=TODO"
+                  >
   
   <MasterDetailPage.Master>
   <ContentPage Title="Menu"
                BackgroundColor="Black">
     <StackLayout Orientation="Vertical" Padding="10">
+      
+      <Button Clicked="Refresh" 
+              Text="Odśwież" 
+              TextColor="White"
+              BorderColor="White"/>
+      
     <ListView x:Name="MenuListView">
       <ListView.ItemTemplate>
         <DataTemplate>
-          <ViewCell>
+          <ViewCell Tapped="SetToDoList">
             <StackLayout Orientation="Vertical"
 									Padding="5.0"
-									HorizontalOptions="Start">         
+									HorizontalOptions="Start">
+              <Grid Padding="5">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto"/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding Name}" Grid.Column="0" Font="Bold" FontSize="20" TextColor="White"/>
+                <Label Text="{Binding HowMuch}" Grid.Column="2" Font="Small" FontSize="20" TextColor="White"/>
+              </Grid>
             </StackLayout>
           </ViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
+     
     </StackLayout>
+   
   </ContentPage>  
   </MasterDetailPage.Master>
   
   <MasterDetailPage.Detail>
-    <Views:TasksList Title="TODO"/>
+    <Views:TasksList Title="TODO" BackgroundColor="White"/>
   </MasterDetailPage.Detail>
 </MasterDetailPage>
