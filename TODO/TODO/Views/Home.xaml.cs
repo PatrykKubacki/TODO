@@ -20,7 +20,9 @@ namespace TODO.Views {
 			IList<TodoItem> _todos = App.Database.GetItems().ToList();
 			var howMuchDo = _todos.Count(x => x.Done);
 			var howMuchToDo = _todos.Count(x => !x.Done);
+			var howMuch = _todos.Count;
 
+			_model.Add(new MenuViewModel(false, "Wszystkie:", howMuch));
 			_model.Add(new MenuViewModel(false, "Do zrobienia:", howMuchToDo));
 			_model.Add(new MenuViewModel(true, "Zrobione:", howMuchDo));
 
@@ -28,6 +30,8 @@ namespace TODO.Views {
 		}
 
 		private void SetToDoList(object sender, EventArgs e) {
+			/*var item = MenuListView.SelectedItem as MenuViewModel;
+			this.Detail.BindingContext = item.Done ? App.Database.GetItems().Where(x => x.Done) : App.Database.GetItems().Where(x => !x.Done);*/
 		}
 
 		private void Refresh(object sender, EventArgs e) {

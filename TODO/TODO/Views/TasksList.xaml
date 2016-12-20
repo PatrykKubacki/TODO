@@ -2,11 +2,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			x:Class="TODO.Views.TasksList"
-			BackgroundColor="White">
-
+			BackgroundColor="White"
+  xmlns:converters="clr-namespace:TODO.Converters;assembly=TODO">
+<ContentPage.Resources>
+  <ResourceDictionary>
+    <converters:ColorConverter x:Key="ColorConverter"/>  
+  </ResourceDictionary>
+</ContentPage.Resources>
+  
 	<StackLayout Orientation="Vertical">
-		<Image x:Name="NoToDoImage"/>
-
+		
+    <Grid Margin="5" x:Name="ButtonsGrid">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="1*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="40"/>
+      </Grid.RowDefinitions>
+      <Button Text="Do zrobienia" Grid.Column="0" Grid.Row="0" Clicked="GetToDos" TextColor="Black" BorderColor="Black"/>
+      <Button Text="Zrobione" Grid.Column="1" Grid.Row="0" Clicked="GetDone" TextColor="Black" BorderColor="Black"/>
+      <Button Text="Wszystkie" Grid.Column="2" Grid.Row="0" Clicked="GetAll" TextColor="Black" BorderColor="Black"/>
+    </Grid>
+    <Image x:Name="NoToDoImage"/>
 		<ListView x:Name="TasksView">
 			<ListView.ItemTemplate>
 				<DataTemplate>
@@ -18,7 +37,7 @@
 						<StackLayout Orientation="Vertical"
 									Padding="5.0"
 									HorizontalOptions="Start">
-							<StackLayout Orientation="Vertical" Padding="5" BackgroundColor="Silver">
+							<StackLayout Orientation="Vertical" Padding="5" BackgroundColor="{Binding Done, Converter={StaticResource ColorConverter}}">
 								<Grid Padding="5">
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto"/>

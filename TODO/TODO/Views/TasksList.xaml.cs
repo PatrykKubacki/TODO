@@ -52,9 +52,9 @@ namespace TODO.Views {
 
 		private  void Edit(object sender, EventArgs e) {
 			var toDoItem = TasksView.SelectedItem as TodoItem;
-			var toDoPage = new AddTask();
-			toDoPage.BindingContext = toDoItem;
-			Navigation.PushAsync(toDoPage);
+			var toDoPage = new AddTask { BindingContext = toDoItem };
+			var nav = new NavigationPage(toDoPage) { BarBackgroundColor = Color.White };
+			Navigation.PushAsync(nav);
 		}
 
 		private async void ShowDetails(object sender, EventArgs e) {
@@ -81,6 +81,26 @@ namespace TODO.Views {
 				}
 			}
 
+		}
+
+		private void GetToDos(object sender, EventArgs e) {
+			IList<TodoItem> items = App.Database.GetItems().ToList();
+			var todoItems = items.OrderBy(x => x.DeadLine).Where(x => !x.Done);
+			SetVisibility(todoItems.ToList());
+			TasksView.ItemsSource = todoItems;
+		}
+
+		private void GetDone(object sender, EventArgs e) {
+			IList<TodoItem> items = App.Database.GetItems().ToList();
+			var doneItems = items.OrderBy(x => x.DeadLine).Where(x => x.Done);
+			SetVisibility(doneItems.ToList());
+			TasksView.ItemsSource = doneItems;
+		}
+
+		private void GetAll(object sender, EventArgs e) {
+			IList<TodoItem> toDoItems = App.Database.GetItems().ToList();
+			SetVisibility(toDoItems);
+			TasksView.ItemsSource = toDoItems.OrderBy(x => x.DeadLine);
 		}
 	}
 
