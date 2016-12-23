@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TODO.Entities;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
 
 namespace TODO.Views {
+
 	public partial class AddTask : ContentPage {
 		public AddTask() {
 			InitializeComponent();
@@ -18,9 +14,14 @@ namespace TODO.Views {
 		}
 
 		private async void Save(object sender, EventArgs e) {
-			var toDoItem = (TodoItem)BindingContext;
-			App.Database.SaveItem(toDoItem);
-			await Navigation.PushAsync(new Home());
+			if (string.IsNullOrEmpty(Name.Text)  || string.IsNullOrEmpty(Category.Text))
+				await DisplayAlert("Błąd", "Wypełnij wszystkie wymagane pola", "OK");
+			else {
+				var toDoItem = (TodoItem)BindingContext;
+				App.Database.SaveItem(toDoItem);
+				await Navigation.PushAsync(new Home());
+			}
 		}
 	}
+
 }

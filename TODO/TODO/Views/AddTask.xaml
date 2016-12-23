@@ -3,19 +3,105 @@
 			xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			x:Class="TODO.Views.AddTask"
 			Title="Dodaj nowe zadanie"
-             BackgroundColor="White"
-             >
+			BackgroundColor="White"
+			xmlns:Models="clr-namespace:TODO.Models;assembly=TODO">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style x:Key="BaseStyle" TargetType="Label">
+				<Setter Property="HorizontalTextAlignment" Value="Start"/>
+				<Setter Property="VerticalTextAlignment" Value="Center"/>
+				<Setter Property="FontSize" Value="Micro"/>
+				<Setter Property="FontAttributes" Value="Italic"/>
+			</Style>
+
+			<Models:BooleanToObjectConverter x:Key="BoolToStyleText" x:TypeArguments="Style">
+				<Models:BooleanToObjectConverter.FalseObject>
+					<Style TargetType="Label" BasedOn="{StaticResource BaseStyle}">
+						<Setter Property="TextColor" Value="#F44336"/>
+						<Setter Property="Text" Value="Pole obowiązkowe"/>
+					</Style>
+				</Models:BooleanToObjectConverter.FalseObject>
+
+				<Models:BooleanToObjectConverter.TrueObject>
+					<Style TargetType="Label" BasedOn="{StaticResource BaseStyle}">
+						<Setter Property="TextColor" Value="#4CAF50"/>
+						<Setter Property="Text" Value="Poprawnie!"/>
+					</Style>
+				</Models:BooleanToObjectConverter.TrueObject>
+			</Models:BooleanToObjectConverter>
+      
+    <Models:BooleanToObjectConverter x:Key="BoolToStyleImage" x:TypeArguments="Style">
+        <Models:BooleanToObjectConverter.FalseObject>
+          <Style TargetType="Image">
+            <Setter Property="HeightRequest" Value="20" />
+            <Setter Property="Source" Value="{Models:ImageResource TODO/Images/error.png}" />
+          </Style>
+        </Models:BooleanToObjectConverter.FalseObject>
+
+        <Models:BooleanToObjectConverter.TrueObject>
+          <Style TargetType="Image">
+            <Setter Property="HeightRequest" Value="20" />
+            <Setter Property="Source" Value="{Models:ImageResource TODO/Images/success.png}" />
+          </Style>
+        </Models:BooleanToObjectConverter.TrueObject>
+      </Models:BooleanToObjectConverter>
+
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
 
 	<StackLayout Orientation="Vertical"
 				VerticalOptions="Center"
-				HorizontalOptions="Center">
-		<Entry x:Name="Name" Placeholder="Nazwa" Text="{Binding Name}"/>
+				HorizontalOptions="Center"
+    Padding="25,0">
+     <Label Style="{Binding Source={x:Reference NameValidator}, Path=IsValid, Converter={StaticResource BoolToStyleText}}"/>   
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="40"/>
+      </Grid.ColumnDefinitions>
+    
+    <Entry x:Name="Name" Placeholder="Nazwa" Grid.Column="0" Grid.Row="0" Text="{Binding Name}">
+			<Entry.Behaviors>
+				<Models:Validator x:Name="NameValidator"/>
+			</Entry.Behaviors>
+		</Entry>
+     <Image Grid.Column="1" Grid.Row="0"  x:Name="NameSuccessErrorImage"
+                  Style="{Binding Source={x:Reference NameValidator}, Path=IsValid, 
+                                Converter={StaticResource BoolToStyleImage}}"/>
+        </Grid>
+      
+  
+		
+		
 		<Entry x:Name="Description" Placeholder="Opis" Text="{Binding Description}"/>
-		<Entry x:Name="Category" Placeholder="Kategoria" Text="{Binding Category}"/>
-    <Label Text="Na kiedy"/>
+    
+    <Label Style="{Binding Source={x:Reference CategoryValidator}, Path=IsValid, Converter={StaticResource BoolToStyleText}}"/>
+    
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="40"/>
+      </Grid.ColumnDefinitions>
+		<Entry x:Name="Category" Grid.Column="0" Grid.Row="0" Placeholder="Kategoria" Text="{Binding Category}">
+			<Entry.Behaviors>
+				<Models:Validator x:Name="CategoryValidator"/>
+			</Entry.Behaviors>
+		</Entry>
+      <Image Grid.Column="1" Grid.Row="0"  x:Name="CategorySuccessErrorImage"
+                  Style="{Binding Source={x:Reference CategoryValidator}, Path=IsValid, 
+                                Converter={StaticResource BoolToStyleImage}}"/>
+		</Grid>
+		<Label Text="Na kiedy"/>
 		<DatePicker x:Name="DeadLine" Date="{Binding DeadLine}"/>
 		<Label Text="Zrobione?"/>
-		<Switch x:Name="Done" IsToggled="{Binding Done}" />
+		<Switch x:Name="Done" IsToggled="{Binding Done}"/>
 
 
 		<Grid>
@@ -27,12 +113,12 @@
 			<Button Text="Zapisz"
 					Grid.Column="0"
 					Clicked="Save"
-              BorderColor="Black"/>
-      
+					BorderColor="Black"/>
+
 			<Button Text="Anuluj"
 					Grid.Column="1"
 					Clicked="Cancel"
-              BorderColor="Black"/>
+					BorderColor="Black"/>
 		</Grid>
 	</StackLayout>
 </ContentPage>
